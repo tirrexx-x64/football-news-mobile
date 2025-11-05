@@ -60,7 +60,22 @@ class LeftDrawer extends StatelessWidget {
                   ));
             },
           ),
-          // TODO: Buat ListTile baru untuk ke halaman melihat news
+          ListTile(
+            leading: const Icon(Icons.newspaper),
+            title: const Text('See Football News'),
+            // Bagian redirection ke halaman melihat news
+            onTap: () {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MyHomePage(),
+                  ));
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(const SnackBar(
+                    content: Text("Kamu telah menekan tombol See Football News!")));
+            },
+          ),
         ],
       ),
     );
