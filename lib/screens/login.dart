@@ -97,17 +97,15 @@ class _LoginPageState extends State<LoginPage> {
                       String username = _usernameController.text;
                       String password = _passwordController.text;
 
-                      // Check credentials
-                      // TODO: Change the URL and don't forget to add trailing slash (/) at the end of URL!
-                      // To connect Android emulator with Django on localhost, use URL http://10.0.2.2/
-                      // If you using chrome,  use URL https://tirta-rendy-footballnews.pbp.cs.ui.ac.id
-                      final response = await request
-                          .login("http://[YOUR_APP_URL]/auth/login/", {
-                        'username': username,
-                        'password': password,
-                      });
+                      try {
+                        // Check credentials
+                        final response = await request
+                            .login("https://tirta-rendy-footballnews.pbp.cs.ui.ac.id/auth/login/", {
+                          'username': username,
+                          'password': password,
+                        });
 
-                      if (request.loggedIn) {
+                        if (request.loggedIn) {
                         String message = response['message'];
                         String uname = response['username'];
                         if (context.mounted) {
@@ -143,6 +141,25 @@ class _LoginPageState extends State<LoginPage> {
                           );
                         }
                       }
+                    } catch (e) {
+                      if (context.mounted) {
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: const Text('Error'),
+                            content: Text('An error occurred: $e'),
+                            actions: [
+                              TextButton(
+                                child: const Text('OK'),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                    }
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,

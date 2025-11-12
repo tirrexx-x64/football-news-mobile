@@ -61,22 +61,7 @@ class LeftDrawer extends StatelessWidget {
                   ));
             },
           ),
-          ListTile(
-            leading: const Icon(Icons.newspaper),
-            title: const Text('See Football News'),
-            // Bagian redirection ke halaman melihat news
-            onTap: () {
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => MyHomePage(),
-                  ));
-              ScaffoldMessenger.of(context)
-                ..hideCurrentSnackBar()
-                ..showSnackBar(const SnackBar(
-                    content: Text("Kamu telah menekan tombol See Football News!")));
-            },
-          ),
+          
           ListTile(
             leading: const Icon(Icons.add_reaction_rounded),
             title: const Text('News List'),
